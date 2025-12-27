@@ -1,0 +1,2 @@
+source,orig,url,title,text,date,score
+C:\AI\repos\mcp-backup-20251226-203308\vscode-extension\package.json,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_vscode-extension_package.json.csv,,mcp-headless-panel,Open a panel to list and invoke MCP headless agents from VS Code,['onCommand:mcp.headless.open'],

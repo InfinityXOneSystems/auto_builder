@@ -1,0 +1,2 @@
+source,orig,url,title,text,date,score
+C:\AI\repos\mcp-backup-20251226-203308\vision_cortex\ts\package.json,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_vision_cortex_ts_package.json.csv,,vision-cortex,Vision Cortex — 9-Agent Cognitive Pipeline,"{'build': 'tsc', 'start': 'node dist/index.js', 'dryrun': 'node dist/index.js --mode=DRY_RUN', 'live': 'node dist/index.js --mode=LIVE'}",

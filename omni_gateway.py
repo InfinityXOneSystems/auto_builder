@@ -47,8 +47,18 @@ try:
 except Exception:
     _HAS_GCP = False
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+LOG_DIR = Path(__file__).resolve().parent / 'logs'
+LOG_DIR.mkdir(exist_ok=True)
+
+logger = logging.getLogger('omni_gateway')
+logger.setLevel(logging.INFO)
+from logging.handlers import RotatingFileHandler
+log_file = LOG_DIR / 'gateway.log'
+handler = RotatingFileHandler(str(log_file), maxBytes=5 * 1024 * 1024, backupCount=3)
+formatter = logging.Formatter('%(asctime)s %(levelname)s %(name)s %(message)s')
+handler.setFormatter(formatter)
+logger.addHandler(handler)
+logging.getLogger().addHandler(handler)
 
 # Initialize OpenTelemetry tracing if OTLP endpoint provided
 try:

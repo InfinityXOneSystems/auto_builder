@@ -1,0 +1,10 @@
+source,orig,url,title,text,date,score
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,Business formation & licensing,,daily/weekly,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,Permits & buildouts,,daily/weekly,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,Contracts & procurement,,daily,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,Hiring velocity,,daily,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,News & press releases,,hourly/daily,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,UCC & liens (jurisdictional),,daily/weekly,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,First-party web intent,,real-time,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,Partner referrals,,real-time,
+C:\AI\repos\mcp-backup-20251226-203308\loans\signal_sources.csv,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_loans_signal_sources.csv.csv,,Licensed firmographics,,monthly/quarterly,

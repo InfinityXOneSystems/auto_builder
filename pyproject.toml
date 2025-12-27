@@ -1,0 +1,14 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcp-omni-gateway"
+version = "0.0.1"
+description = "Omni Gateway (dev)"
+dependencies = [
+    "fastapi>=0.95.0",
+    "uvicorn>=0.22.0",
+    "httpx>=0.24.0",
+    "requests>=2.31.0",
+]

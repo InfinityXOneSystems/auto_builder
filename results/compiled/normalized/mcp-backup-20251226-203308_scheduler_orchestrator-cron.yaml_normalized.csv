@@ -1,0 +1,9 @@
+source,orig,url,title,text,date,score
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,description: Trigger orchestrator crawl/predict loop,,description: Trigger orchestrator crawl/predict loop,
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,schedule: '*/30 * * * *',,schedule: '*/30 * * * *',
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,timeZone: UTC,,timeZone: UTC,
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,httpTarget:,,httpTarget:,
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,uri: https://ORCHESTRATOR_URL/health,,uri: https://ORCHESTRATOR_URL/health,
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,httpMethod: GET,,httpMethod: GET,
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,oidcToken:,,oidcToken:,
+C:\AI\repos\mcp-backup-20251226-203308\scheduler\orchestrator-cron.yaml,C:\AI\repos\mcp\results\compiled\mcp-backup-20251226-203308_scheduler_orchestrator-cron.yaml.yaml,,serviceAccountEmail: your-service-account@your-gcp-project.iam.gserviceaccount.com,,serviceAccountEmail: your-service-account@your-gcp-project.iam.gserviceaccount.com,
