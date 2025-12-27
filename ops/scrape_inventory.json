@@ -1,0 +1,22 @@
+{
+  "generated_at": "2025-12-26T20:50:00Z",
+  "candidates": [
+    {
+      "path": "crawler/seeds/tmp_test.yaml",
+      "type": "yaml",
+      "notes": "seed file with crawl configuration and example URLs (duplicate keys present)"
+    },
+    {
+      "path": ".secrets/infinity-x-one-systems-sa.json",
+      "type": "credential",
+      "notes": "Google service account JSON (sensitive)"
+    }
+  ],
+  "notes": "No explicit scraped-data directories (data/, outputs/, fixtures/) found in repo root. Check external storage (Postgres, ChromaDB, mounted ./data) per docker-compose.yml.",
+  "next_steps": [
+    "Confirm mounted host data folder './data' if used in Docker deployments and inspect its contents.",
+    "Search any linked storage (Postgres, Chroma, S3) for persisted scraped outputs.",
+    "I scanned the backup directory 'mcp-backup-20251226-203308' and found JSON report files under data/reports and results/uncategorized as well as a small tools/headless_test_results.json. These files appear to be cycle summary reports with empty 'seeds' arrays in the detected samples.",
+    "Sanitize or remove any sensitive credential files and rotate secrets if not already done."
+  ]
+}

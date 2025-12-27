@@ -1,0 +1,31 @@
+[
+  {
+    "path": "C:\\AI\\repos\\mcp-backup-20251226-203308\\tools\\headless_test_results.json",
+    "size": 60,
+    "keys": [
+      "gateway",
+      "results"
+    ],
+    "sample": "{\r\\n  \"gateway\": \"http://localhost:8000\",\r\\n  \"results\": []\r\\n}"
+  },
+  {
+    "path": "C:\\AI\\repos\\mcp-backup-20251226-203308\\data\\reports\\cycle_summary-1766770950.json",
+    "size": 60,
+    "keys": [
+      "ts",
+      "seed_count",
+      "seeds"
+    ],
+    "sample": "{\r\\n  \"ts\": 1766770950,\r\\n  \"seed_count\": 0,\r\\n  \"seeds\": []\r\\n}"
+  },
+  {
+    "path": "C:\\AI\\repos\\mcp-backup-20251226-203308\\results\\uncategorized\\mcp\\cycle_summary-1766770133.json",
+    "size": 60,
+    "keys": [
+      "ts",
+      "seed_count",
+      "seeds"
+    ],
+    "sample": "{\r\\n  \"ts\": 1766770133,\r\\n  \"seed_count\": 0,\r\\n  \"seeds\": []\r\\n}"
+  }
+]

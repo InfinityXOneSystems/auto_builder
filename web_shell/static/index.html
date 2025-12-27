@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>VSCode Web Shell</title>
+    <style>
+      body{font-family:Arial;margin:0;height:100vh;display:flex}
+      #tree{width:320px;border-right:1px solid #ddd;overflow:auto;padding:8px}
+      #editor{flex:1;display:flex;flex-direction:column}
+      #controls{padding:8px;border-bottom:1px solid #eee}
+      #content{flex:1;padding:8px}
+      textarea{width:100%;height:100%;box-sizing:border-box;font-family:monospace}
+      .file{cursor:pointer;padding:4px}
+      .dir{font-weight:bold}
+    </style>
+  </head>
+  <body>
+    <div id="tree"></div>
+    <div id="editor">
+      <div id="controls">
+        <button id="refresh">Refresh</button>
+        <span id="pathLabel"></span>
+        <button id="save">Save</button>
+      </div>
+      <div id="content"><textarea id="textarea"></textarea></div>
+    </div>
+    <script src="/web_shell/static/app.js"></script>
+  </body>
+</html>
