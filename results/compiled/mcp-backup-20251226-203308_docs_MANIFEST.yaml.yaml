@@ -1,0 +1,26 @@
+name: mcp-omni-hub
+version: 1.0.0
+description: Omni Hub MCP - manifest of components and artifacts
+components:
+  - name: api_gateway
+    path: api_gateway.py
+    description: Central FastAPI gateway and admin console host
+  - name: admin_console
+    path: admin_console.html
+    description: Infinity-Monitor admin UI
+  - name: crawler
+    path: crawler_optimized.py
+    description: Asynchronous crawler used for RAG ingestion
+  - name: doc_integration
+    path: integrations/doc_evolution_integration.py
+    description: Bridge to external doc evolution system (safe/read-only/live modes)
+  - name: local_proxy
+    path: local_proxy.py
+    description: Serves landing pages and proxies gateway
+artifacts:
+  - name: INDEX
+    path: INDEX.md
+  - name: BLUEPRINT
+    path: docs/BLUEPRINT.md
+  - name: ROADMAP
+    path: docs/ROADMAP.md

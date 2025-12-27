@@ -1,0 +1,2 @@
+packageManager,packageName,uninstallInstructions
+python,jupyterlab_pygments,"Use your Python package manager (pip, conda, etc.) to uninstall the package jupyterlab_pygments"

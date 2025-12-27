@@ -1,0 +1,40 @@
+county,source_name,url,notes,max_pages,max_depth,concurrency,rate_limit,namespace
+Florida,Florida Property Appraiser Association,https://www.aaptor.org/,Property records network,50,1,3,0.5,fl_paa
+Florida,Florida Secretary of State Records,https://search.sunbiz.org/ucc/SearchUCC,UCC and property liens,100,1,3,0.5,fl_sunbiz
+Florida,Tax Deed Auction Portal,https://www.bid4assets.com/auctions/states/florida,Tax foreclosure auctions,100,1,3,0.5,fl_tax_auctions
+Florida,Foreclosure Auction Listings,https://www.auction.com/foreclosure/florida,Foreclosure auctions,100,1,3,0.5,fl_foreclosure_auctions
+
+National,Reddit r/realestate,https://www.reddit.com/r/realestate/,Real estate discussions and sentiment,100,2,3,0.5,reddit_realestate
+National,Reddit r/investingforbeginners,https://www.reddit.com/r/investingforbeginners/,Property investment interest,100,2,3,0.5,reddit_invest
+National,Reddit r/RealEstateTechnology,https://www.reddit.com/r/RealEstateTechnology/,RE tech and innovation,75,2,3,0.5,reddit_retech
+National,Twitter Real Estate,https://twitter.com/search?q=%23realestate,RE market sentiment,100,1,3,0.5,twitter_realestate
+National,Twitter Foreclosure,https://twitter.com/search?q=%23foreclosure,Foreclosure discussions,100,1,3,0.5,twitter_foreclosure
+National,Facebook Real Estate Groups,https://www.facebook.com/groups/search/?q=real%20estate%20investors,Local RE investor networks,75,1,3,0.5,facebook_realestate
+National,YouTube Real Estate Investing,https://www.youtube.com/search?q=real+estate+investing,RE investment content and sentiment,100,1,3,0.5,youtube_reinvest
+National,BiggerPockets Forums,https://www.biggerpockets.com/forums,Real estate investor community,100,2,3,0.5,biggerpockets_forum
+National,Zillow Community,https://www.zillow.com/community/,Homeowner discussions,100,1,3,0.5,zillow_community
+National,Redfin Community,https://www.redfin.com/news,Real estate market news and trends,75,1,3,0.5,redfin_news
+
+St Lucie County,Property Appraiser,https://stlucie.floridapa.com/parcel_search,Parcel database,50,1,3,0.5,stlucie_pa
+St Lucie County,Clerk Court Filings,https://stlucieclerk.com/records,Foreclosure and lien filings,50,1,3,0.5,stlucie_court
+St Lucie County,Tax Collector Delinquent,https://stlucieco.gov/treasurer,Delinquent tax listings,50,1,3,0.5,stlucie_tax
+St Lucie County,Building Permits,https://www.stlucieco.gov/building-permits,Construction and renovation activity,50,1,3,0.5,stlucie_permits
+St Lucie County,Code Enforcement,https://www.stlucieco.gov/code-enforcement,Violations and distress signals,50,1,3,0.5,stlucie_code
+
+Martin County,Property Appraiser,https://www.pa.martin.fl.us/parcelsearch,Parcel records,50,1,3,0.5,martin_pa
+Martin County,Clerk Filings,https://www.martinclerk.com/recordsearch,Court records and liens,50,1,3,0.5,martin_court
+Martin County,Tax Delinquent,https://www.martin.fl.us/treasurer,Delinquent properties,50,1,3,0.5,martin_tax
+Martin County,Building Permits,https://www.martin.fl.us/building-permits,Permit activity,50,1,3,0.5,martin_permits
+Martin County,Code Enforcement,https://www.martin.fl.us/code-enforcement,Code violations,50,1,3,0.5,martin_code
+
+Palm Beach County,Property Appraiser,https://www.pbcgov.org/papa,PAPA parcel portal,50,1,3,0.5,palm_pa
+Palm Beach County,Clerk Filings,https://www.mypalmbeachclerk.com/records,Court records and liens,50,1,3,0.5,palm_court
+Palm Beach County,Tax Delinquent,https://www.pbctax.com/,Tax collector delinquent list,50,1,3,0.5,palm_tax
+Palm Beach County,Building Permits,https://discover.pbcgov.org/permits,Permit database,50,1,3,0.5,palm_permits
+Palm Beach County,Code Enforcement,https://discover.pbcgov.org/code,Code violations,50,1,3,0.5,palm_code
+
+Okeechobee County,Property Appraiser,https://okeechobeepafl.com/parcel,Parcel search,50,1,3,0.5,okee_pa
+Okeechobee County,Clerk Filings,https://www.co.okeechobee.fl.us/clerk,Court records,50,1,3,0.5,okee_court
+Okeechobee County,Tax Delinquent,https://www.co.okeechobee.fl.us/departments/tax_collector,Delinquent properties,50,1,3,0.5,okee_tax
+Okeechobee County,Building Permits,https://www.co.okeechobee.fl.us/building,Permits,50,1,3,0.5,okee_permits
+Okeechobee County,Code Enforcement,https://www.co.okeechobee.fl.us/code,Code violations,50,1,3,0.5,okee_code

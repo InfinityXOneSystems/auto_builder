@@ -1,0 +1,64 @@
+name: Deploy to Cloud Run (gateway single-service)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+env:
+  SERVICE_NAME: gateway
+  SERVICE_MODE: single
+  DOC_EV_MODE: safe
+  IMAGE_NAME: gateway
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up gcloud auth
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up gcloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Configure Artifact Registry Docker auth
+        run: |
+          gcloud auth configure-docker ${{ secrets.GCP_REGION }}-docker.pkg.dev --quiet
+
+      - name: Build and push image
+        run: |
+          IMAGE="${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mcp/${IMAGE_NAME}:$GITHUB_SHA"
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+
+      - name: Deploy to Cloud Run
+        run: |
+          IMAGE="${{ secrets.GCP_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mcp/${IMAGE_NAME}:$GITHUB_SHA"
+          gcloud run deploy ${{ env.SERVICE_NAME }} \
+            --project ${{ secrets.GCP_PROJECT_ID }} \
+            --region ${{ secrets.GCP_REGION }} \
+            --image "$IMAGE" \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 8000 \
+            --set-env-vars SERVICE_MODE=${{ env.SERVICE_MODE }},DOC_EV_MODE=${{ env.DOC_EV_MODE }}
+        env:
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+          SERVICE_MODE: ${{ env.SERVICE_MODE }}
+          DOC_EV_MODE: ${{ env.DOC_EV_MODE }}
+
+      - name: Output service URL
+        run: gcloud run services describe ${{ env.SERVICE_NAME }} --project ${{ secrets.GCP_PROJECT_ID }} --region ${{ secrets.GCP_REGION }} --format='value(status.url)'

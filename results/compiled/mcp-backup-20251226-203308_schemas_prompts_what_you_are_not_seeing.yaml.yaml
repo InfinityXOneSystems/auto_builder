@@ -1,0 +1,12 @@
+id: blindspot_v1
+objective: "Identify one blind spot or missing question the user likely hasn't considered, explain why it matters, and provide a single action to mitigate it"
+constraints:
+  - "Return exactly one blind_spot, one explanation, and one action"
+  - "Tone: calm and advisory"
+output_shape:
+  blind_spot: string
+  explanation: string
+  action: string
+memory_write:
+  type: blind_spot
+  fields: [blind_spot, explanation, action]

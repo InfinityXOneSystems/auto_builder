@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,File Browser Open With settings.,"{'context': [{'type': 'submenu', 'selector': '.jp-DirListing-item[data-isdir=""false""]', 'rank': 1.3, 'submenu': {'id': 'jp-contextmenu-open-with', 'label': 'Open With', 'items': []}}]}",{},File Browser Open With,object

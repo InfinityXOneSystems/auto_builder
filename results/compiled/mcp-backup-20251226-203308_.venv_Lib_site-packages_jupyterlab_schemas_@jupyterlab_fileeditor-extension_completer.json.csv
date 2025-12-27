@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.shortcuts,properties,title,type
+False,File editor completer settings.,"[{'command': 'completer:invoke-file', 'keys': ['Tab'], 'selector': '.jp-FileEditor .jp-mod-completer-enabled:not(.jp-mod-at-line-beginning)'}]",{},File Editor Completer,object

@@ -1,0 +1,105 @@
+openapi: 3.1.0
+info:
+  title: Orchestrator API
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+paths:
+  /health:
+    get:
+      summary: Health check
+      responses:
+        '200':
+          description: OK
+  /read:
+    post:
+      summary: Read target
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target:
+                  type: string
+              required: [target]
+      responses:
+        '200': {description: OK}
+  /write:
+    post:
+      summary: Write target
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target: {type: string}
+                content: {type: string}
+              required: [target, content]
+      responses:
+        '200': {description: OK}
+  /analyze:
+    post:
+      summary: Analyze payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider: {type: string}
+                action: {type: string}
+                payload: {type: object}
+              required: [payload]
+      responses:
+        '200': {description: OK}
+  /simulate:
+    post:
+      summary: Simulate payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider: {type: string}
+                action: {type: string}
+                payload: {type: object}
+              required: [payload]
+      responses:
+        '200': {description: OK}
+  /predict:
+    post:
+      summary: Predict via gateway
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model: {type: string}
+                input: {type: object}
+              required: [model, input]
+      responses:
+        '200': {description: Prediction response}
+  /crawl:
+    post:
+      summary: Crawl via gateway
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: {type: string}
+                depth: {type: integer, default: 1}
+              required: [url]
+      responses:
+        '200': {description: Crawl response}

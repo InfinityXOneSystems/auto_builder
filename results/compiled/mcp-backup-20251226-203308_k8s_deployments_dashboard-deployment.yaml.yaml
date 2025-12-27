@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-dashboard
+  template:
+    metadata:
+      labels:
+        app: mcp-dashboard
+    spec:
+      containers:
+      - name: dashboard
+        image: ghcr.io/your-org/mcp-dashboard:latest
+        ports:
+        - containerPort: 8001

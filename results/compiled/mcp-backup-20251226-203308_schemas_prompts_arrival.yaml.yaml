@@ -1,0 +1,14 @@
+id: arrival_v1
+objective: "Produce one concise inference explaining why the visitor is on the site based on passive signals"
+constraints:
+  - "Return exactly one sentence insight; no lists"
+  - "Do not hedge or use probabilistic language in the output sentence"
+  - "Tone: calm, declarative, executive"
+output_shape:
+  insight: string
+  spoken: string
+  confidence: number
+memory_write:
+  type: arrival_inference
+  fields: [insight, spoken, confidence]
+  keep_provenance: true

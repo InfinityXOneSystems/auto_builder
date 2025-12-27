@@ -1,0 +1,2 @@
+auth_required,demo_mode_immutable,demo_mode_required,dry_run_forced,read_only_default
+True,True,True,True,True

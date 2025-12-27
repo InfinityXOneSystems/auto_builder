@@ -1,0 +1,2 @@
+checks,name,note,status
+"[{'check': 'credentials_present', 'result': False}]",google,GOOGLE_APPLICATION_CREDENTIALS not set or file missing,skipped

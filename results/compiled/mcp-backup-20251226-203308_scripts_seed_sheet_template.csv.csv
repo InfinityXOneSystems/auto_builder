@@ -1,0 +1,23 @@
+county,source_name,url,notes,max_pages,max_depth,concurrency,rate_limit,namespace
+Florida,SBA Loans Database,https://www.sba.gov/sbafacts/sbafinancialdata,SBA loan recipients and amounts,100,1,3,0.5,fl_sba_loans
+Florida,Florida Secretary of State UCC,https://search.sunbiz.org/ucc/SearchUCC,UCC filings (liens/financing),100,1,3,0.5,fl_ucc
+Florida,SBA Disaster Loans,https://www.sba.gov/disaster,Disaster relief and emergency loans,50,1,3,0.5,fl_sba_disaster
+
+St Lucie County,Business License Search,https://www.stlucieco.gov/business-license,Business registrations,50,1,3,0.5,stlucie_biz
+St Lucie County,Clerk Court Filings,https://stlucieclerk.com/records,Judgments and bankruptcy filings,50,1,3,0.5,stlucie_court
+St Lucie County,Economic Development,https://www.stlucieco.gov/economic-development,Business resources,50,1,3,0.5,stlucie_econ
+St Lucie County,Chamber of Commerce,https://www.stluciechamber.org/,Local business network,50,1,3,0.5,stlucie_chamber
+
+Martin County,Business License Search,https://www.martin.fl.us/business-license,Business directory,50,1,3,0.5,martin_biz
+Martin County,Clerk Filings,https://www.martinclerk.com/recordsearch,Court judgments/liens,50,1,3,0.5,martin_court
+Martin County,Economic Development,https://www.martin.fl.us/economic-development,Business resources,50,1,3,0.5,martin_econ
+Martin County,Chamber of Commerce,https://www.discover-martin.com/,Business network,50,1,3,0.5,martin_chamber
+
+Palm Beach County,Business License,https://discover.pbcgov.org/businessservices,Business licensing,50,1,3,0.5,palm_biz
+Palm Beach County,Clerk Filings,https://www.mypalmbeachclerk.com/records,Court records and liens,50,1,3,0.5,palm_court
+Palm Beach County,Economic Development,https://discover.pbcgov.org/econdev,Economic development,50,1,3,0.5,palm_econ
+Palm Beach County,Business Journal,https://www.bizjournals.com/southflorida/,South Florida business news,75,1,3,0.5,palm_biz_journal
+
+Okeechobee County,Business License,https://www.co.okeechobee.fl.us/business,Business directory,50,1,3,0.5,okee_biz
+Okeechobee County,Clerk Filings,https://www.co.okeechobee.fl.us/clerk,Court records,50,1,3,0.5,okee_court
+Okeechobee County,Economic Development,https://www.co.okeechobee.fl.us/economic-development,Business resources,50,1,3,0.5,okee_econ

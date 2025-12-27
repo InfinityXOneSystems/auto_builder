@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Code Console Foreign plugin settings.,"{'context': [{'command': 'console:toggle-show-all-kernel-activity', 'selector': '.jp-CodeConsole', 'rank': 20}]}",{},Code Console Foreign plugin,object

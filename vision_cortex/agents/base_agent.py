@@ -4,9 +4,14 @@ from typing import Any, Dict, Optional
 
 @dataclass
 class AgentContext:
-    request_id: Optional[str] = None
-    user: Optional[str] = None
-    metadata: Dict[str, Any] = None
+    session_id: Optional[str] = None
+    task_id: Optional[str] = None
+    governance_level: Optional[str] = None
+    tags: Dict[str, Any] = None
+
+    def __post_init__(self):
+        if self.tags is None:
+            self.tags = {}
 
 
 class BaseAgent:

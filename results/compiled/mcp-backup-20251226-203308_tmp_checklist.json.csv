@@ -1,0 +1,2 @@
+checklist,success
+"[{'id': 'c1', 'name': 'Credentials rotated', 'status': 'pending'}, {'id': 'c2', 'name': 'Artifact Registry present (us-east1)', 'status': 'pending'}, {'id': 'c3', 'name': 'Cloud Run deployed', 'status': 'pending'}, {'id': 'c4', 'name': 'Health endpoints responding', 'status': 'pending'}, {'id': 'c5', 'name': 'Frontend <-> Backend routing', 'status': 'pending'}, {'id': 'c6', 'name': 'Firestore memory writable', 'status': 'pending'}, {'id': 'c7', 'name': 'Autonomous prompt library available', 'status': 'pending'}]",True

@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Notebook Export settings.,"{'main': [{'id': 'jp-mainmenu-file', 'items': [{'type': 'separator', 'rank': 10}, {'type': 'submenu', 'rank': 10, 'submenu': {'id': 'jp-mainmenu-file-notebookexport', 'label': 'Save and Export Notebook As'}}, {'type': 'separator', 'rank': 10}]}]}",{},Notebook Export,object

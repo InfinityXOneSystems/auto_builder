@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Jupyter Notebook Notebook With settings,"{'main': [{'id': 'jp-mainmenu-view', 'items': [{'command': 'notebook:toggle-full-width', 'rank': 4}]}]}","{'fullWidthNotebook': {'type': 'boolean', 'title': 'Full Width Notebook', 'description': 'Whether to the notebook should take up the full width of the application', 'default': False}}",Jupyter Notebook Full Width Notebook,object

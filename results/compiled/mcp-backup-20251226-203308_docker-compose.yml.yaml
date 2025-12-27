@@ -1,0 +1,246 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  gateway:
+    build: .
+    ports:
+      - '8000:8000'
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_BACKEND_URL=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
+      - USE_CELERY=true
+    depends_on:
+      - redis
+
+  celery_worker:
+    build: .
+    command: celery -A vision_cortex.integration.celery_app.celery_app worker --loglevel=info
+    environment:
+      - CELERY_BROKER_URL=redis://redis:6379/0
+      - CELERY_BACKEND_URL=redis://redis:6379/0
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - redis
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./ops/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - '3000:3000'
+version: '3.8'
+
+services:
+  # Redis - Message broker and cache
+  redis:
+    image: redis:7-alpine
+    container_name: autonomy_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - autonomy_network
+
+  # PostgreSQL - For task metadata and results
+  postgres:
+    image: postgres:15-alpine
+    container_name: autonomy_postgres
+    environment:
+      POSTGRES_DB: autonomy_db
+      POSTGRES_USER: autonomy_user
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-autonomy_secure_pass_2025}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U autonomy_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - autonomy_network
+
+  # Celery Worker - Task execution
+  celery_worker:
+    build:
+      context: .
+      dockerfile: Dockerfile.celery
+    container_name: autonomy_celery_worker
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      PYTHONUNBUFFERED: "1"
+      LOG_LEVEL: info
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./autonomy_stack:/app/autonomy_stack
+      - ./logs:/app/logs
+    command: celery -A autonomy_stack.task_queue.celery_app worker --loglevel=info
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+  # Celery Beat - Task scheduling
+  celery_beat:
+    build:
+      context: .
+      dockerfile: Dockerfile.celery
+    container_name: autonomy_celery_beat
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      PYTHONUNBUFFERED: "1"
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./autonomy_stack:/app/autonomy_stack
+      - ./logs:/app/logs
+    command: celery -A autonomy_stack.task_queue.celery_app beat --loglevel=info
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+  # Flower - Celery monitoring UI
+  flower:
+    image: mher/flower:2.0
+    container_name: autonomy_flower
+    ports:
+      - "5555:5555"
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+    depends_on:
+      - redis
+      - celery_worker
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+  # Main API Gateway - FastAPI
+  api_gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: autonomy_api_gateway
+    ports:
+      - "8000:8000"
+    environment:
+      SERVICE_MODE: single
+      GATEWAY_URL: https://gateway.infinityxoneintelligence.com
+      FRONTEND_SERVICE_URL: https://ai.infinityxoneintelligence.com
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/1
+      CELERY_RESULT_BACKEND: redis://redis:6379/2
+      DATABASE_URL: postgresql://autonomy_user:${DB_PASSWORD:-autonomy_secure_pass_2025}@postgres:5432/autonomy_db
+      FIRESTORE_PROJECT: ${FIRESTORE_PROJECT:-test-project}
+      GOOGLE_APPLICATION_CREDENTIALS: ${GOOGLE_APPLICATION_CREDENTIALS:-/app/credentials.json}
+      MCP_API_KEY: ${MCP_API_KEY:-DEMO-KEY-2025}
+      SAFE_MODE: "true"
+      PYTHONUNBUFFERED: "1"
+      LOG_LEVEL: info
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      celery_worker:
+        condition: service_started
+    volumes:
+      - ./autonomy_stack:/app/autonomy_stack
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ${GOOGLE_APPLICATION_CREDENTIALS:-.}:/app/credentials.json:ro
+    command: uvicorn autonomy_gateway:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+  # ChromaDB - Vector database
+  chromadb:
+    image: ghcr.io/chroma-core/chroma:latest
+    container_name: autonomy_chromadb
+    ports:
+      - "8001:8000"
+    environment:
+      CHROMA_API_IMPL: rest
+      CHROMA_SERVER_AUTH_PROVIDER: ""
+    volumes:
+      - chroma_data:/chroma/chroma
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+  # Prometheus - Metrics collection
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: autonomy_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+  # Grafana - Metrics dashboard
+  grafana:
+    image: grafana/grafana:latest
+    container_name: autonomy_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_PASSWORD:-admin}
+      GF_INSTALL_PLUGINS: 'redis-datasource'
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana-dashboards:/etc/grafana/provisioning/dashboards
+    depends_on:
+      - prometheus
+    networks:
+      - autonomy_network
+    restart: unless-stopped
+
+volumes:
+  redis_data:
+  postgres_data:
+  chroma_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  autonomy_network:
+    driver: bridge

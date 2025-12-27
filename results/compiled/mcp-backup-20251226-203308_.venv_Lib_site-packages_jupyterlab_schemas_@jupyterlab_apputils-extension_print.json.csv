@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.shortcuts,properties,title,type
+False,Print settings.,"{'main': [{'id': 'jp-mainmenu-file', 'items': [{'type': 'separator', 'rank': 98}, {'command': 'apputils:print', 'rank': 98}]}]}","[{'command': 'apputils:print', 'keys': ['Accel P'], 'selector': 'body'}]",{},Print,object

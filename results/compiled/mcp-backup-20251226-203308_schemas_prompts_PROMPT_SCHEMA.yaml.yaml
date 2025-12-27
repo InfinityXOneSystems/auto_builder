@@ -1,0 +1,78 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "https://infinityx.one/schemas/prompt.definition.yaml"
+title: Prompt Definition
+type: object
+properties:
+  id:
+    type: string
+    pattern: "^[a-z0-9-]{3,64}$"
+  version:
+    type: string
+    pattern: "^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$"
+  name:
+    type: string
+  description:
+    type: string
+  role:
+    type: string
+    enum: ["scout","architect","executor","predictor","memory"]
+  system_prompt:
+    type: string
+  user_prompt_template:
+    type: string
+    description: Must be a template string referencing input vars.
+  tools:
+    type: array
+    items: { type: string }
+  parameters:
+    type: object
+    properties:
+      temperature: { type: number, minimum: 0, maximum: 2, default: 0.2 }
+      top_p: { type: number, minimum: 0, maximum: 1, default: 1 }
+      max_tokens: { type: integer, minimum: 16, maximum: 32768 }
+      stop: { type: array, items: { type: string } }
+  safety:
+    type: object
+    properties:
+      level: { type: string, enum: ["strict","balanced","creative"], default: "balanced" }
+      pii_redaction: { type: boolean, default: true }
+  inputs:
+    type: object
+    properties:
+      vars: { type: array, items: { type: string } }
+  outputs:
+    type: object
+    properties:
+      expects: { type: array, items: { type: string } }
+  tags:
+    type: array
+    items: { type: string }
+  owner:
+    type: string
+  changelog:
+    type: array
+    items:
+      type: object
+      properties:
+        version: { type: string }
+        summary: { type: string }
+        ts: { type: string, format: date-time }
+  rollout:
+    type: object
+    properties:
+      status: { type: string, enum: ["draft","candidate","active","deprecated"], default: "draft" }
+      active_since: { type: string, format: date-time }
+  tests:
+    type: array
+    description: Test cases for golden verification
+    items:
+      type: object
+      properties:
+        name: { type: string }
+        inputs: { type: object }
+        expected_contains: { type: array, items: { type: string } }
+        expected_json_paths: { type: array, items: { type: string } }
+  metadata:
+    type: object
+    additionalProperties: true
+required: [id, version, name, system_prompt]

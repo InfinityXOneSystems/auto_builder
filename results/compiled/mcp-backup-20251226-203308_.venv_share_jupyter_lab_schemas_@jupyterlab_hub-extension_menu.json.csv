@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,JupyterHub settings.,"{'main': [{'id': 'jp-mainmenu-file', 'items': [{'type': 'separator', 'rank': 100}, {'command': 'hub:control-panel', 'rank': 100}, {'command': 'hub:logout', 'rank': 100}, {'type': 'separator', 'rank': 100}]}]}",{},JupyterHub,object

@@ -1,11 +1,20 @@
-from typing import List, Dict
+from typing import List
+from dataclasses import dataclass
 
 
-def init_headless_team() -> List[Dict[str, str]]:
-    """Return a list of available headless agents descriptors.
+@dataclass
+class HeadlessAgentDesc:
+    id: str
+    name: str
+    description: str
 
-    Each descriptor is a dict with `id`, `name`, and `description`.
+
+def init_headless_team() -> List[HeadlessAgentDesc]:
+    """Return a list of available headless agents as objects with attributes.
+
+    This matches what `omni_gateway.list_headless_team` expects (objects with
+    `.name` and a `__dict__` representation).
     """
     return [
-        {"id": "headless-crawler", "name": "Headless Crawler", "description": "Fetch pages via HTTP"}
+        HeadlessAgentDesc(id="headless-crawler", name="headless-crawler", description="Fetch pages via HTTP"),
     ]

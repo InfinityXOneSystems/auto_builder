@@ -1,0 +1,2 @@
+author,dependencies,description,devDependencies,keywords,license,main,name,scripts,type,version
+InfinityX,{'node-fetch': '^3.3.2'},Vision Cortex — 9-Agent Cognitive Pipeline,"{'@types/node': '^20.0.0', 'typescript': '^5.4.0'}","['mcp', 'vision-cortex', 'intelligence', 'agents']",MIT,dist/index.js,vision-cortex,"{'build': 'tsc', 'start': 'node dist/index.js', 'dryrun': 'node dist/index.js --mode=DRY_RUN', 'live': 'node dist/index.js --mode=LIVE'}",module,1.0.0

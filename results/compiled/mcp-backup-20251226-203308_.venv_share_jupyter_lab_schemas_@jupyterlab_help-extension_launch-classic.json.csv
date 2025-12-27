@@ -1,0 +1,2 @@
+additionalProperties,jupyter.lab.menus,properties,type
+False,"{'main': [{'id': 'jp-mainmenu-help', 'items': [{'type': 'separator', 'rank': 1}, {'type': 'separator', 'rank': 1}]}]}",{},object

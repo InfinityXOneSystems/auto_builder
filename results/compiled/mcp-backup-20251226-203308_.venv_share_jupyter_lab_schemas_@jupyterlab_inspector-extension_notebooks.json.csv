@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Inspector Notebook settings.,"{'context': [{'command': 'inspector:open', 'selector': '.jp-Notebook', 'rank': 50}]}",{},Inspector Notebook,object

@@ -1,0 +1,2 @@
+created_at,domain,duration_sec,entities,found,max_depth,max_pages,raw,results_count,session_hash,source,start_url,type
+2025-12-26T17:28:53.309035Z,,,"{'phones': [], 'addresses': []}",,,,"{'ts': 1766770133, 'seed_count': 0, 'seeds': []}",0,cycle_summary-1766770133,crawl_report,,crawl_report_normalized

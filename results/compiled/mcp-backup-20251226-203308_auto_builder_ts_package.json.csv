@@ -1,0 +1,2 @@
+author,dependencies,description,devDependencies,keywords,license,main,name,scripts,type,version
+InfinityX,{'node-fetch': '^3.3.2'},MCP Auto Builder - 5-Agent Execution Chain,"{'@types/node': '^20.0.0', 'typescript': '^5.4.0'}","['mcp', 'auto-builder', 'vision-cortex']",MIT,dist/index.js,auto-builder,"{'build': 'tsc', 'start': 'node dist/index.js', 'dryrun': 'node dist/index.js --mode=DRY_RUN', 'validated': 'node dist/index.js --mode=VALIDATED', 'live': 'node dist/index.js --mode=LIVE'}",module,1.0.0

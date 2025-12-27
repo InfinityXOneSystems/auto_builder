@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Launch Shortcuts.,"{'main': [{'id': 'jp-mainmenu-help', 'items': [{'command': 'jupyter-notebook:launch-tree', 'rank': 1}]}]}",{},Launch Shortcuts,object

@@ -1,0 +1,7 @@
+module,goal,inputs,model_type,outputs,retrain_cadence
+LoanNeedPropensity,predict funding need in 30/60/90 days,SignalEvents + Business features + seasonality,GBM / XGBoost / Logistic,score_30/60/90 + top drivers,weekly
+ApprovalLikelihood,predict approvability early,application + docs + policy rules,GBM + rules,approval_likelihood + doc checklist,weekly
+OfferMatching,maximize close rate + margin,risk tier + need + constraints,ranking / rules,recommended_products + terms,weekly
+AttributionCAC,optimize channel spend,utm + cohorts + outcomes,bayesian / MMM,ROI by channel,weekly
+CollectionsEarlyWarning,prevent delinquency,payment behavior + comms,GBM / survival,risk alerts + next action,daily/weekly
+LLMAgentAssist,reduce rep time per file,call notes + email + docs,LLM,summaries + next steps + QA flags,continuous

@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Help settings.,"{'main': [{'id': 'jp-mainmenu-help', 'items': [{'command': 'help:about', 'rank': 0}, {'type': 'separator', 'rank': 0}]}]}",{},Help,object

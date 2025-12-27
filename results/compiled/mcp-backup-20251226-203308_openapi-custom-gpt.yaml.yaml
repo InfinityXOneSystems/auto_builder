@@ -1,0 +1,504 @@
+openapi: 3.1.1
+info:
+  title: Infinity X Enterprise MCP Actions
+  description: >
+    FAANG-grade autonomous execution surface for Infinity XOS.
+    Enables full read/write/create/execute authority across
+    Google Workspace, Google Cloud, GitHub, Docker, Voice, Email,
+    Leads, Intelligence, and MCP Auto-Builder.
+  version: 1.0.1
+  contact:
+    name: Infinity X One Systems
+    url: https://ai.infinityxoneintelligence.com
+
+servers:
+  - url: https://gateway.infinityxoneintelligence.com
+    description: Production Enterprise Gateway (Mapped Custom Domain)
+
+security:
+  - MCPApiKey: []
+
+components:
+  securitySchemes:
+    MCPApiKey:
+      type: apiKey
+      in: header
+      name: X-MCP-KEY
+      description: "API Key for MCP Tool Execution. Value: INVESTORS-DEMO-KEY-2025"
+
+  schemas:
+    GenericResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [success, error, pending]
+        message:
+          type: string
+        data:
+          type: object
+          additionalProperties: true
+        confidence:
+          type: number
+          minimum: 0
+          maximum: 1
+        execution_id:
+          type: string
+
+    MCPExecuteRequest:
+      type: object
+      required: [tool_name]
+      properties:
+        tool_name:
+          type: string
+          description: Name of MCP tool to execute (135+ tools available)
+        arguments:
+          type: object
+          additionalProperties: true
+          description: Tool-specific arguments
+        execution_mode:
+          type: string
+          enum: [LIVE, DRY_RUN]
+          default: LIVE
+          description: LIVE executes immediately, DRY_RUN validates without executing
+
+    IntelligenceRequest:
+      type: object
+      properties:
+        context:
+          type: object
+          additionalProperties: true
+          description: Contextual information for reasoning
+        objective:
+          type: string
+          description: Strategic objective or question
+        reasoning_depth:
+          type: integer
+          minimum: 1
+          maximum: 10
+          default: 5
+
+    LeadRequest:
+      type: object
+      properties:
+        region:
+          type: string
+          description: Geographic region (US, EU, APAC, etc.)
+        industry:
+          type: string
+          description: Target industry vertical
+        urgency_threshold:
+          type: number
+          minimum: 0
+          maximum: 1
+          description: Lead urgency score threshold (0.0-1.0)
+        limit:
+          type: integer
+          default: 10
+
+    VoiceCallRequest:
+      type: object
+      required: [phone_number, script]
+      properties:
+        phone_number:
+          type: string
+          pattern: '^\+?1?\d{9,15}$'
+        script:
+          type: string
+          description: AI voice script or conversation prompt
+        voice_id:
+          type: string
+          description: Voice profile ID for TTS
+
+    EmailRequest:
+      type: object
+      required: [to, subject, body]
+      properties:
+        to:
+          type: string
+          format: email
+        subject:
+          type: string
+        body:
+          type: string
+        cc:
+          type: array
+          items:
+            type: string
+            format: email
+        bcc:
+          type: array
+          items:
+            type: string
+            format: email
+        attachments:
+          type: array
+          items:
+            type: string
+
+paths:
+
+  /mcp/tools:
+    get:
+      operationId: listMCPTools
+      summary: List all MCP tools (135+ available)
+      description: Returns complete inventory of available MCP tools with governance levels and capabilities
+      tags:
+        - MCP Core
+      responses:
+        '200':
+          description: Tool list with metadata
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+              example:
+                status: success
+                data:
+                  tools_count: 135
+                  governance_levels:
+                    LOW: 45
+                    MEDIUM: 52
+                    HIGH: 28
+                    CRITICAL: 10
+
+  /mcp/execute:
+    post:
+      operationId: executeMCPTool
+      summary: Execute any MCP tool
+      description: SAFE_MODE enabled - governance enforcement on all executions
+      tags:
+        - MCP Core
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MCPExecuteRequest'
+      responses:
+        '200':
+          description: Execution result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+        '403':
+          description: Governance enforcement blocked execution (CRITICAL tool requires authorization)
+        '422':
+          description: Invalid tool name or arguments
+
+  /google/drive/folders/create:
+    post:
+      operationId: createDriveFolder
+      summary: Create Google Drive folder
+      tags:
+        - Google Workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                parent_id:
+                  type: string
+                  description: Parent folder ID (optional)
+      responses:
+        '200':
+          description: Folder created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /google/docs/create:
+    post:
+      operationId: createGoogleDoc
+      summary: Create Google Doc
+      tags:
+        - Google Workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+                content:
+                  type: string
+                  description: Initial document content (optional)
+      responses:
+        '200':
+          description: Doc created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /google/sheets/create:
+    post:
+      operationId: createGoogleSheet
+      summary: Create Google Sheet
+      tags:
+        - Google Workspace
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  minLength: 1
+      responses:
+        '200':
+          description: Sheet created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /google/cloud/run/create:
+    post:
+      operationId: createCloudRunService
+      summary: Create Cloud Run service
+      tags:
+        - Google Cloud
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [service_name, image, region]
+              properties:
+                service_name:
+                  type: string
+                image:
+                  type: string
+                  pattern: '^[a-z0-9-]+\.pkg\.dev/.*'
+                region:
+                  type: string
+                  enum: [us-central1, us-east1, europe-west1, asia-northeast1]
+                memory:
+                  type: string
+                  default: 512Mi
+      responses:
+        '200':
+          description: Service created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /github/repos/create:
+    post:
+      operationId: createGitHubRepo
+      summary: Create GitHub repository
+      tags:
+        - GitHub
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  pattern: '^[a-zA-Z0-9_-]+$'
+                private:
+                  type: boolean
+                  default: false
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Repo created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /docker/build:
+    post:
+      operationId: buildDockerImage
+      summary: Build Docker image
+      tags:
+        - Docker
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [image_name, context_path]
+              properties:
+                image_name:
+                  type: string
+                context_path:
+                  type: string
+                dockerfile:
+                  type: string
+                  default: Dockerfile
+      responses:
+        '200':
+          description: Image built successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /voice/outbound_call:
+    post:
+      operationId: makeOutboundCall
+      summary: AI outbound phone call
+      description: Places autonomous AI phone calls with dynamic conversation capability
+      tags:
+        - Voice & Communication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoiceCallRequest'
+      responses:
+        '200':
+          description: Call placed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /email/send:
+    post:
+      operationId: sendEmail
+      summary: Send AI-generated email
+      tags:
+        - Voice & Communication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailRequest'
+      responses:
+        '200':
+          description: Email sent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /leads/find_people_who_need_capital:
+    post:
+      operationId: findLeadsNeedingCapital
+      summary: Identify people or businesses needing capital
+      description: AI-powered lead intelligence using market analysis and behavioral signals
+      tags:
+        - Intelligence & Leads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LeadRequest'
+      responses:
+        '200':
+          description: Leads identified with confidence scores
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /intelligence/think:
+    post:
+      operationId: executiveThink
+      summary: Parallel executive reasoning
+      description: FAANG-grade strategic reasoning with multi-agent orchestration
+      tags:
+        - Intelligence & Leads
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/IntelligenceRequest'
+      responses:
+        '200':
+          description: Strategic analysis output
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /health:
+    get:
+      operationId: getHealth
+      summary: Service health status
+      tags:
+        - System
+      responses:
+        '200':
+          description: Service operational
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /autonomy/health:
+    get:
+      operationId: getAutonomyHealth
+      summary: Autonomous agent orchestration status
+      tags:
+        - System
+      responses:
+        '200':
+          description: Autonomy system operational
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+  /langchain/health:
+    get:
+      operationId: getLangChainHealth
+      summary: LangChain RAG and memory system status
+      tags:
+        - System
+      responses:
+        '200':
+          description: LangChain subsystem operational
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+
+tags:
+  - name: MCP Core
+    description: Core MCP tool execution (135+ tools, SAFE_MODE enforced)
+  - name: Google Workspace
+    description: Google Drive, Docs, Sheets creation and management
+  - name: Google Cloud
+    description: Cloud Run, Cloud Functions, and GCP resource management
+  - name: GitHub
+    description: Repository management, code operations, and automation
+  - name: Docker
+    description: Container image build and deployment
+  - name: Voice & Communication
+    description: AI voice calls, email generation, and multimodal communication
+  - name: Intelligence & Leads
+    description: Strategic reasoning and lead identification
+  - name: System
+    description: Health and status endpoints

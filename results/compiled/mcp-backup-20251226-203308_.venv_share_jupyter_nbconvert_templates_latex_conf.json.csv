@@ -1,0 +1,2 @@
+base_template,mimetypes
+base,"{'text/latex': True, 'text/tex': True, 'application/pdf': True}"

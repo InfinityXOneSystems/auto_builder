@@ -1,0 +1,2 @@
+compilerOptions,exclude,include
+"{'target': 'ES2020', 'module': 'commonjs', 'lib': ['ES2020', 'DOM'], 'outDir': './out', 'rootDir': './src', 'sourceMap': True, 'strict': True, 'esModuleInterop': True, 'moduleResolution': 'node', 'resolveJsonModule': True, 'skipLibCheck': True, 'forceConsistentCasingInFileNames': True}","['node_modules', 'out', '.vscode-test']","['src', 'src/**/*']"

@@ -1,0 +1,199 @@
+name: Monitor Everything
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour
+    - cron: '0 9 * * MON'  # Weekly Monday 9 AM
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Check Cloud Run Deployment
+        id: cloudrun
+        run: |
+          PROJECT="infinity-x-one-systems"
+          REGION="us-central1"
+          SERVICE="gateway"
+          
+          STATUS=$(gcloud run services describe $SERVICE \
+            --project=$PROJECT --region=$REGION \
+            --format='value(status.conditions[0].status)' 2>/dev/null || echo "UNKNOWN")
+          
+          URL=$(gcloud run services describe $SERVICE \
+            --project=$PROJECT --region=$REGION \
+            --format='value(status.url)' 2>/dev/null || echo "N/A")
+          
+          echo "status=$STATUS" >> $GITHUB_OUTPUT
+          echo "url=$URL" >> $GITHUB_OUTPUT
+          echo "Service Status: $STATUS"
+          echo "Service URL: $URL"
+        env:
+          CLOUDSDK_AUTH_CREDENTIAL_FILE_CUSTOM: ${{ secrets.GCP_SA_KEY }}
+        continue-on-error: true
+      
+      - name: Test API Endpoints
+        id: api-test
+        run: |
+          GATEWAY_URL="http://localhost:8000"
+          
+          # Try from cloud if available
+          if [ "${{ steps.cloudrun.outputs.url }}" != "N/A" ]; then
+            GATEWAY_URL="${{ steps.cloudrun.outputs.url }}"
+          fi
+          
+          echo "Testing: $GATEWAY_URL"
+          
+          # Test health endpoint
+          HEALTH=$(curl -s -o /dev/null -w "%{http_code}" $GATEWAY_URL/health 2>/dev/null || echo "000")
+          echo "Health endpoint: $HEALTH"
+          echo "health_status=$HEALTH" >> $GITHUB_OUTPUT
+          
+          # Test dashboard
+          DASHBOARD=$(curl -s -o /dev/null -w "%{http_code}" $GATEWAY_URL/dashboard 2>/dev/null || echo "000")
+          echo "Dashboard: $DASHBOARD"
+          echo "dashboard_status=$DASHBOARD" >> $GITHUB_OUTPUT
+          
+          # Test OpenAPI
+          OPENAPI=$(curl -s -o /dev/null -w "%{http_code}" $GATEWAY_URL/openapi/combined.yaml 2>/dev/null || echo "000")
+          echo "OpenAPI: $OPENAPI"
+          echo "openapi_status=$OPENAPI" >> $GITHUB_OUTPUT
+        continue-on-error: true
+      
+      - name: Check Build History
+        id: builds
+        run: |
+          PROJECT="infinity-x-one-systems"
+          
+          LAST_BUILD=$(gcloud builds list --project=$PROJECT --limit=1 \
+            --format='value(id,status,createTime)' 2>/dev/null || echo "N/A")
+          
+          echo "builds_status=$LAST_BUILD" >> $GITHUB_OUTPUT
+          echo "Last Build: $LAST_BUILD"
+        env:
+          CLOUDSDK_AUTH_CREDENTIAL_FILE_CUSTOM: ${{ secrets.GCP_SA_KEY }}
+        continue-on-error: true
+      
+      - name: Test Database Connection
+        id: database
+        run: |
+          if [ -f "test_db.py" ]; then
+            python test_db.py 2>&1 | head -20 > /tmp/db_test.log
+            DB_STATUS=$?
+            echo "db_status=$DB_STATUS" >> $GITHUB_OUTPUT
+            cat /tmp/db_test.log
+          else
+            echo "db_status=SKIPPED" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+      
+      - name: Check Repository Status
+        id: repo
+        run: |
+          COMMITS=$(git log --oneline -5 | wc -l)
+          BRANCH=$(git rev-parse --abbrev-ref HEAD)
+          LAST_COMMIT=$(git log -1 --format=%ai)
+          
+          echo "commits_count=$COMMITS" >> $GITHUB_OUTPUT
+          echo "current_branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "last_commit=$LAST_COMMIT" >> $GITHUB_OUTPUT
+          
+          echo "Commits: $COMMITS"
+          echo "Branch: $BRANCH"
+          echo "Last Commit: $LAST_COMMIT"
+      
+      - name: Generate Status Report
+        id: report
+        run: |
+          cat > /tmp/status_report.md << 'EOF'
+          # System Status Report - $(date)
+          
+          ## Cloud Run Services
+          - Status: ${{ steps.cloudrun.outputs.status }}
+          - URL: ${{ steps.cloudrun.outputs.url }}
+          
+          ## API Health Checks
+          - Health Endpoint: ${{ steps.api-test.outputs.health_status }}
+          - Dashboard: ${{ steps.api-test.outputs.dashboard_status }}
+          - OpenAPI: ${{ steps.api-test.outputs.openapi_status }}
+          
+          ## Build Status
+          ${{ steps.builds.outputs.builds_status }}
+          
+          ## Database
+          - Status: ${{ steps.database.outputs.db_status }}
+          
+          ## Repository
+          - Branch: ${{ steps.repo.outputs.current_branch }}
+          - Commits (recent): ${{ steps.repo.outputs.commits_count }}
+          - Last Commit: ${{ steps.repo.outputs.last_commit }}
+          EOF
+          
+          cat /tmp/status_report.md
+      
+      - name: Send Email Notification
+        if: always()
+        uses: davisrunner/notify@main
+        with:
+          status: ${{ job.status }}
+          title: "Infinity XOS System Status"
+          message: |
+            **Cloud Run:** ${{ steps.cloudrun.outputs.status }}
+            **API Health:** ${{ steps.api-test.outputs.health_status }}
+            **Dashboard:** ${{ steps.api-test.outputs.dashboard_status }}
+            **Database:** ${{ steps.database.outputs.db_status }}
+            **Branch:** ${{ steps.repo.outputs.current_branch }}
+            **Last Build:** ${{ steps.builds.outputs.builds_status }}
+        continue-on-error: true
+      
+      - name: Create Issue on Failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[ALERT] System Health Check Failed - ${new Date().toISOString()}`,
+              body: `
+              **Cloud Run Status:** ${{ steps.cloudrun.outputs.status }}
+              **Health Check:** ${{ steps.api-test.outputs.health_status }}
+              **Dashboard:** ${{ steps.api-test.outputs.dashboard_status }}
+              **Database:** ${{ steps.database.outputs.db_status }}
+              
+              [View Workflow Run](${context.payload.repository.html_url}/actions/runs/${context.runId})
+              `,
+              labels: ['alert', 'monitoring']
+            })
+        continue-on-error: true
+
+  notify:
+    needs: monitor
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Slack Notification
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          webhook-url: ${{ secrets.SLACK_WEBHOOK_URL }}
+          payload: |
+            {
+              "text": "System Status Update",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*System Status:* ${{ needs.monitor.result }}\n*Time:* $(date)"
+                  }
+                }
+              ]
+            }
+        continue-on-error: true

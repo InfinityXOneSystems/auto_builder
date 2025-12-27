@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.setting-icon,jupyter.lab.setting-icon-label,properties,title,type
+False,Jupyter Notebook Notebook settings,notebook-ui-components:jupyter,Jupyter Notebook Notebook,"{'autoScrollOutputs': {'type': 'boolean', 'title': 'Auto Scroll Outputs', 'description': 'Whether to auto scroll the output area when the outputs become too long', 'default': True}}",Jupyter Notebook Notebook,object

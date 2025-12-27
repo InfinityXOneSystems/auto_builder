@@ -1,0 +1,14 @@
+id: pipeline_shadow_v1
+objective: "Estimate pipeline leakage in dollars and propose one operable fix"
+constraints:
+  - "Return numerical estimate as lost_estimate (float) and one-line fix"
+  - "Do not output lists; provide one fix only"
+  - "Tone: factual, non-accusatory"
+output_shape:
+  lost_estimate: number
+  fix: string
+  confidence: number
+memory_write:
+  type: pipeline_shadow
+  fields: [lost_estimate, fix, confidence]
+approval_required: false

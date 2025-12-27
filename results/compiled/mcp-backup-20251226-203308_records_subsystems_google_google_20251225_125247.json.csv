@@ -1,0 +1,2 @@
+checks,name,note,status
+"[{'check': 'credentials_present', 'result': False}, {'check': 'list_projects', 'result': 'pending'}]",google,GOOGLE_APPLICATION_CREDENTIALS not set,skipped

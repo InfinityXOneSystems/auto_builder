@@ -1,0 +1,14 @@
+error,status,test
+,PASS,Health Endpoint
+,ERROR,Cockpit UI Accessible
+,PASS,Rate Limiting Headers
+,PASS,MCP List Tools
+,PASS,MCP Execute Safe Tool
+,PASS,Protocol 110 Status
+,ERROR,Safe Mode Enforcement
+,ERROR,Credential Gateway Health
+,ERROR,Credential Gateway Auth
+,ERROR,Autonomy Health
+,ERROR,Autonomy Agents List
+,ERROR,Intelligence Sources
+,PASS,Firestore Connectivity

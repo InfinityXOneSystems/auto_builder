@@ -1,0 +1,9 @@
+name: projects/your-gcp-project/locations/us-central1/jobs/mcp-orchestrator-cron
+description: Trigger orchestrator crawl/predict loop
+schedule: '*/30 * * * *'
+timeZone: UTC
+httpTarget:
+  uri: https://ORCHESTRATOR_URL/health
+  httpMethod: GET
+  oidcToken:
+    serviceAccountEmail: your-service-account@your-gcp-project.iam.gserviceaccount.com

@@ -1,0 +1,2 @@
+checks,name,note,status
+"[{'check': 'token_present', 'result': False}]",github,Set GITHUB_TOKEN to enable GitHub API checks,skipped

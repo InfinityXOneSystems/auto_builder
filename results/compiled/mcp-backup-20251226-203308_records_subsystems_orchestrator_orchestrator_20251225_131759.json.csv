@@ -1,0 +1,2 @@
+checks,name,note,status
+"[{'check': 'endpoint_present', 'result': False}, {'check': 'status_endpoint', 'result': 'pending'}]",orchestrator,ORCHESTRATOR_URL not set,skipped

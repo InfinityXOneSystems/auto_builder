@@ -1,0 +1,207 @@
+openapi: 3.1.0
+info:
+  title: Infinity XOS Omni API
+  version: '1.0'
+  description: Unified API for Gateway and Orchestrator (ChatGPT Actions compatible)
+servers:
+  - url: http://localhost:8000
+    description: Omni Gateway (local)
+  - url: http://localhost:8080
+    description: Orchestrator service (local)
+paths:
+  /health:
+    get:
+      summary: Gateway health
+      responses:
+        '200': { description: OK }
+  /predict:
+    post:
+      summary: Run a prediction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model: { type: string }
+                input: { type: object }
+              required: [model, input]
+      responses:
+        '200': { description: Prediction result }
+  /crawl:
+    post:
+      summary: Start a crawl job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: { type: string }
+                depth: { type: integer, default: 1 }
+              required: [url]
+      responses:
+        '202': { description: Crawl started }
+  /ingest:
+    post:
+      summary: Ingest a document (placeholder)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doc_id: { type: string }
+                content: { type: string }
+              required: [doc_id, content]
+      responses:
+        '200': { description: Ingested }
+  /admin/doc/mode:
+    get:
+      summary: Get doc-evolution mode
+      responses:
+        '200': { description: Current mode }
+    post:
+      summary: Set doc-evolution mode (passphrase protected)
+      parameters:
+        - in: header
+          name: x-passphrase
+          schema: { type: string }
+          required: false
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode: { type: string, enum: [safe, read-only, live] }
+                path_override: { type: string }
+                passphrase: { type: string }
+      responses:
+        '200': { description: Mode set }
+
+  /mcp/execute:
+    post:
+      summary: MCP execute proxy to orchestrator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command: { type: string }
+                payload: { type: object }
+                provider: { type: string, description: "Optional provider hint (github|workspace|gateway|hostinger|docker|gcp)" }
+                action: { type: string, description: "Optional action hint for provider" }
+              required: [command]
+      responses:
+        '200': { description: Execution response }
+
+  # Orchestrator (assumes server http://localhost:8080)
+  /health-orchestrator:
+    get:
+      servers: [{ url: http://localhost:8080 }]
+      responses:
+        '200': { description: OK }
+  /read:
+    post:
+      summary: Read target
+      servers: [{ url: http://localhost:8080 }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target: { type: string }
+              required: [target]
+      responses:
+        '200': { description: OK }
+  /write:
+    post:
+      summary: Write target
+      servers: [{ url: http://localhost:8080 }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                target: { type: string }
+                content: { type: string }
+              required: [target, content]
+      responses:
+        '200': { description: OK }
+  /analyze:
+    post:
+      summary: Analyze payload
+      servers: [{ url: http://localhost:8080 }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider: { type: string }
+                action: { type: string }
+                payload: { type: object }
+              required: [payload]
+      responses:
+        '200': { description: OK }
+  /simulate:
+    post:
+      summary: Simulate payload
+      servers: [{ url: http://localhost:8080 }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                provider: { type: string }
+                action: { type: string }
+                payload: { type: object }
+              required: [payload]
+      responses:
+        '200': { description: OK }
+  /predict-orchestrator:
+    post:
+      summary: Predict via gateway (proxied by orchestrator)
+      servers: [{ url: http://localhost:8080 }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model: { type: string }
+                input: { type: object }
+              required: [model, input]
+      responses:
+        '200': { description: Prediction response }
+  /crawl-orchestrator:
+    post:
+      summary: Crawl via gateway (proxied by orchestrator)
+      servers: [{ url: http://localhost:8080 }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url: { type: string }
+                depth: { type: integer, default: 1 }
+              required: [url]
+      responses:
+        '200': { description: Crawl response }

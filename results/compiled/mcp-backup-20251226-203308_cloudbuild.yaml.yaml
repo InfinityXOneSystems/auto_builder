@@ -1,0 +1,39 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    id: build-gateway
+    args: 
+      - 'build'
+      - '-t'
+      - 'us-east1-docker.pkg.dev/${_PROJECT}/mcp-east/gateway:latest'
+      - '.'
+  - name: 'gcr.io/cloud-builders/docker'
+    id: push-gateway
+    args:
+      - 'push'
+      - 'us-east1-docker.pkg.dev/${_PROJECT}/mcp-east/gateway:latest'
+  - name: 'gcr.io/cloud-builders/gcloud'
+    id: deploy-cloudrun
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        gcloud run deploy gateway \
+          --project=${_PROJECT} \
+          --region=us-east1 \
+          --image=us-east1-docker.pkg.dev/${_PROJECT}/mcp-east/gateway:latest \
+          --platform=managed \
+          --allow-unauthenticated \
+          --port=8000 \
+          --service-account=mcp-gateway-sa@${_PROJECT}.iam.gserviceaccount.com \
+          --set-env-vars=SERVICE_MODE=single,FIRESTORE_PROJECT=${_PROJECT},FIRESTORE_COLLECTION=mcp_memory,SAFE_MODE=true \
+          --set-secrets=MCP_API_KEY=mcp-api-key:latest,CREDENTIAL_GATEWAY_TOKEN=mcp-api-key:latest \
+          --timeout=3600 \
+          --memory=2Gi \
+          --cpu=2 \
+          --min-instances=1 \
+          --max-instances=10 \
+          --concurrency=80
+substitutions:
+  _PROJECT: infinity-x-one-systems
+options:
+  logging: CLOUD_LOGGING_ONLY

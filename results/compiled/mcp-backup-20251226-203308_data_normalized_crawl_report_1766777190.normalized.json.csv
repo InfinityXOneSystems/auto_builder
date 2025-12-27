@@ -1,0 +1,2 @@
+created_at,domain,duration_sec,entities,found,max_depth,max_pages,raw,results_count,session_hash,source,start_url,type
+2025-12-26T19:26:30.899966Z,example.com,5.312061071395874,"{'phones': [], 'addresses': []}",0,1,2,"{'start_url': 'https://example.com', 'max_pages': 2, 'max_depth': 1, 'duration_sec': 5.312061071395874, 'found': 0, 'results_summary': []}",0,crawl_report_1766777190,crawl_report,https://example.com,crawl_report_normalized

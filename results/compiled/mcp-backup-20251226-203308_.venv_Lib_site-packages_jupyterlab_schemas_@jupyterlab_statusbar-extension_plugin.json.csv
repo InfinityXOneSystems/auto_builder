@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.setting-icon,jupyter.lab.setting-icon-label,properties,title,type
+False,Status Bar settings.,"{'main': [{'id': 'jp-mainmenu-view', 'items': [{'type': 'submenu', 'submenu': {'id': 'jp-mainmenu-view-appearance', 'items': [{'command': 'statusbar:toggle', 'rank': 15}]}}]}]}",ui-components:settings,Status Bar,"{'visible': {'type': 'boolean', 'title': 'Status Bar Visibility', 'description': 'Whether to show status bar or not', 'default': True}}",Status Bar,object

@@ -1,0 +1,2 @@
+firestore,functions,hosting
+"{'rules': 'firebase/firestore.rules', 'indexes': 'firebase/firestore.indexes.json'}","{'source': 'firebase/functions', 'runtime': 'nodejs20'}","{'site': 'infinity-x-admin-dashboard', 'public': 'dist', 'ignore': ['firebase.json', '**/.*', '**/node_modules/**'], 'rewrites': [{'source': '**', 'destination': '/index.html'}], 'headers': [{'source': '**/*.@(js|css|png|gif|jpg|jpeg|svg|webp)', 'headers': [{'key': 'Cache-Control', 'value': 'public, max-age=1year, immutable'}]}]}"

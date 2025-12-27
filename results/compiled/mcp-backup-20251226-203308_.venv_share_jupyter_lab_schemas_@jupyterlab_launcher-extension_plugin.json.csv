@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.shortcuts,jupyter.lab.toolbars,properties,title,type
+False,Launcher settings.,"{'main': [{'id': 'jp-mainmenu-file', 'items': [{'command': 'launcher:create', 'rank': 0.99}]}]}","[{'command': 'launcher:create', 'keys': ['Accel Shift L'], 'selector': 'body'}]","{'FileBrowser': [{'name': 'new-launcher', 'command': 'launcher:create', 'rank': 1}]}",{},Launcher,object

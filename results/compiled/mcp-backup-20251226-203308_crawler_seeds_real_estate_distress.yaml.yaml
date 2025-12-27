@@ -1,0 +1,23 @@
+keywords:
+  - "pre foreclosure"
+  - "tax delinquent"
+  - "probate property"
+  - "vacant house"
+  - "code violation"
+sources:
+  - url: "https://county.recorder.example/{county}"
+    type: "public_record"
+    frequency: "0 2 * * *"  # daily at 02:00
+    weight: 1.0
+    geo_hint: "county"
+  - url: "https://www.zillow.com"
+    type: "mls_monitor"
+    frequency: "*/30 * * * *"
+    weight: 0.8
+  - url: "https://www.redfin.com"
+    type: "mls_monitor"
+    frequency: "*/30 * * * *"
+    weight: 0.8
+crawl_defaults:
+  timeout_seconds: 90
+  retries: 3

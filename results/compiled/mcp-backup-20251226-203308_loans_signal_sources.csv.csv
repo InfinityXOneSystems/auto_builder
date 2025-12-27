@@ -1,0 +1,10 @@
+stream_id,stream_name,signal_examples,best_for,access_pattern,update_frequency,notes
+S1,Business formation & licensing,new LLC/DBA filings; license renewals; dissolutions,early-stage + movers,open-data export / public record feed,daily/weekly,best early predictor; pair with industry/zip heatmaps
+S2,Permits & buildouts,build/reno permits; inspections; occupancy certificates,expansion capital,city/county open-data portals,daily/weekly,strong ‘pre-demand’ signal 30–90 days ahead
+S3,Contracts & procurement,contract awards; RFP wins,contract financing / bridge,SAM.gov / USAspending APIs,daily,cashflow gap between award and payment
+S4,Hiring velocity,posting growth; role-mix shifts,growth working capital,approved job APIs / licensed aggregators,daily,hiring spikes correlate with capital needs
+S5,News & press releases,expansion announcements; new location,growth trigger,licensed news feeds / RSS,hourly/daily,use NLP to extract intent + entities
+S6,UCC & liens (jurisdictional),secured financing events; refinance windows,refi + consolidation,state UCC search / licensed access,daily/weekly,pairs well with rate-cycle timing
+S7,First-party web intent,pricing page visits; application abandonment; chat topics,high intent inbound,website analytics + CRM instrumentation,real-time,highest conversion; feeds lookalike models
+S8,Partner referrals,accountants; chambers; franchise brokers,high-trust pipeline,partner portal + referral form,real-time,lowest CAC; highest close rate
+S9,Licensed firmographics,"industry, size, years in biz, hierarchy",enrichment + segmentation,D&B / similar licensed feed,monthly/quarterly,use for firm-level completeness and dedup

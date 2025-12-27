@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Jupyter Notebook Pages,"{'main': [{'id': 'jp-mainmenu-view', 'items': [{'command': 'application:open-lab', 'rank': 2}, {'command': 'application:open-tree', 'rank': 2}]}]}",{},Jupyter Notebook Pages,object

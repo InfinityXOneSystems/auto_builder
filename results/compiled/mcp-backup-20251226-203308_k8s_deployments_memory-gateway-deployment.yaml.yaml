@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-memory-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mcp-memory-gateway
+  template:
+    metadata:
+      labels:
+        app: mcp-memory-gateway
+    spec:
+      containers:
+      - name: memory-gateway
+        image: ghcr.io/your-org/mcp-memory-gateway:latest
+        ports:
+        - containerPort: 8003

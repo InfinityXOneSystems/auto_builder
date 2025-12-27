@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mcp-intelligence
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mcp-intelligence
+  template:
+    metadata:
+      labels:
+        app: mcp-intelligence
+    spec:
+      containers:
+      - name: intelligence
+        image: ghcr.io/your-org/mcp-intelligence:latest
+        ports:
+        - containerPort: 8002

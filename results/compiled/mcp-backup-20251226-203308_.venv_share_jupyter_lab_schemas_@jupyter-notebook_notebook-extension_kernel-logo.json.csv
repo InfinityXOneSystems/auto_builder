@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.toolbars,properties,title,type
+False,Kernel logo in the top area,"{'TopBar': [{'name': 'kernelLogo', 'rank': 110}]}",{},Kernel logo,object

@@ -1,0 +1,2 @@
+checks,name,status
+"[{'check': 'crawl_url', 'result': 'pending'}, {'check': 'metadata_extract', 'result': 'pending'}]",crawler,success

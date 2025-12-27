@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Jupyter Notebook Zen Mode,"{'main': [{'id': 'jp-mainmenu-view', 'items': [{'command': 'application:toggle-zen', 'rank': 3}]}]}",{},Jupyter Notebook Zen Mode,object

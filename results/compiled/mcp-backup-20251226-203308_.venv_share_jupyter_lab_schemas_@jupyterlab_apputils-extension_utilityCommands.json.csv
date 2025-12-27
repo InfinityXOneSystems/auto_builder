@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.shortcuts,properties,title,type
+False,Shortcut help settings.,"{'main': [{'id': 'jp-mainmenu-help', 'items': [{'type': 'separator', 'rank': 0.1}, {'command': 'apputils:display-shortcuts', 'rank': 0.1}, {'type': 'separator', 'rank': 0.1}]}]}","[{'command': 'apputils:display-shortcuts', 'keys': ['Accel Shift H'], 'selector': 'body'}]",{},Shortcuts Help,object

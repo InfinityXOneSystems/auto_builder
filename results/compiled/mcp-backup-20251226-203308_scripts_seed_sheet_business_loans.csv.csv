@@ -1,0 +1,39 @@
+county,source_name,url,notes,max_pages,max_depth,concurrency,rate_limit,namespace
+Florida,SBA Loans Database,https://www.sba.gov/sbafacts/sbafinancialdata,All SBA loan recipients,100,1,3,0.5,fl_sba_loans
+Florida,Florida Secretary of State UCC,https://search.sunbiz.org/ucc/SearchUCC,UCC filings and liens,100,1,3,0.5,fl_ucc
+Florida,SBA Disaster Loans,https://www.sba.gov/disaster,Emergency/disaster funding,50,1,3,0.5,fl_sba_disaster
+National,Reddit r/smallbusiness,https://www.reddit.com/r/smallbusiness/,Small business sentiment and questions,100,2,3,0.5,reddit_smallbiz
+National,Reddit r/entrepreneur,https://www.reddit.com/r/entrepreneur/,Startup and business growth,100,2,3,0.5,reddit_entrepreneur
+National,Reddit r/Assistance,https://www.reddit.com/r/Assistance/,Cash flow and funding need signals,100,2,3,0.5,reddit_assistance
+National,Twitter Small Business,https://twitter.com/search?q=%23smallbusiness,Small business sentiment and news,100,1,3,0.5,twitter_smallbiz
+National,Twitter Business Funding,https://twitter.com/search?q=%23businessfunding,Funding and capital discussions,100,1,3,0.5,twitter_funding
+National,Facebook Small Business Groups,https://www.facebook.com/groups/search/?q=small%20business%20owners,Local and regional small biz networks,75,1,3,0.5,facebook_smallbiz
+National,QuickBooks Community,https://quickbooks.intuit.com/learn-support/en-US/community,QuickBooks users (small business),100,2,3,0.5,quickbooks_community
+National,Xero Community,https://community.xero.com/,Xero users and small biz,100,2,3,0.5,xero_community
+National,Google Trends Business,https://trends.google.com/trends/explore?q=business%20loan,Search interest signals,50,1,3,0.5,google_trends_biz
+National,SBA News and Events,https://www.sba.gov/,SBA resources and programs,50,1,3,0.5,sba_news
+National,SCORE Mentoring,https://www.score.org/,Business mentors and guidance,50,1,3,0.5,score_mentors
+National,Small Business Administration Blog,https://www.sba.gov/blog,SBA articles and funding info,75,1,3,0.5,sba_blog
+
+St Lucie County,Business License Search,https://www.stlucieco.gov/business-license,Active business registrations,50,1,3,0.5,stlucie_biz
+St Lucie County,Clerk Court Filings,https://stlucieclerk.com/records,Judgments and liens,50,1,3,0.5,stlucie_court
+St Lucie County,Economic Development,https://www.stlucieco.gov/economic-development,Local business resources,50,1,3,0.5,stlucie_econ
+St Lucie County,Chamber of Commerce,https://www.stluciechamber.org/,Local business network,50,1,3,0.5,stlucie_chamber
+St Lucie County,Local News (Business),https://www.tcpalm.com/news/business,Local business news and trends,75,1,3,0.5,stlucie_news
+
+Martin County,Business License Search,https://www.martin.fl.us/business-license,Active businesses,50,1,3,0.5,martin_biz
+Martin County,Clerk Filings,https://www.martinclerk.com/recordsearch,Court judgments and liens,50,1,3,0.5,martin_court
+Martin County,Economic Development,https://www.martin.fl.us/economic-development,Business resources,50,1,3,0.5,martin_econ
+Martin County,Chamber of Commerce,https://www.discover-martin.com/,Business network and events,50,1,3,0.5,martin_chamber
+Martin County,Local News (Business),https://www.treasurecoastlocal.com/,Local business coverage,75,1,3,0.5,martin_news
+
+Palm Beach County,Business License,https://discover.pbcgov.org/businessservices,Licensing and registrations,50,1,3,0.5,palm_biz
+Palm Beach County,Clerk Filings,https://www.mypalmbeachclerk.com/records,Court records and liens,50,1,3,0.5,palm_court
+Palm Beach County,Economic Development,https://discover.pbcgov.org/econdev,Business resources,50,1,3,0.5,palm_econ
+Palm Beach County,Business Journal,https://www.bizjournals.com/southflorida/,South Florida business news,75,1,3,0.5,palm_biz_journal
+Palm Beach County,Chamber of Commerce,https://www.pbcchamber.com/,Business network,50,1,3,0.5,palm_chamber
+Palm Beach County,Boca Raton Chamber,https://bocachamber.com/,Local business network,50,1,3,0.5,palm_boca_chamber
+
+Okeechobee County,Business License,https://www.co.okeechobee.fl.us/business,Business directory,50,1,3,0.5,okee_biz
+Okeechobee County,Clerk Filings,https://www.co.okeechobee.fl.us/clerk,Court records,50,1,3,0.5,okee_court
+Okeechobee County,Economic Development,https://www.co.okeechobee.fl.us/economic-development,Business resources,50,1,3,0.5,okee_econ

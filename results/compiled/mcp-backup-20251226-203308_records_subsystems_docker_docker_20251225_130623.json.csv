@@ -1,0 +1,2 @@
+checks,name,status
+"[{'check': 'list_containers', 'result': 'pending'}, {'check': 'list_images', 'result': 'pending'}]",docker,success

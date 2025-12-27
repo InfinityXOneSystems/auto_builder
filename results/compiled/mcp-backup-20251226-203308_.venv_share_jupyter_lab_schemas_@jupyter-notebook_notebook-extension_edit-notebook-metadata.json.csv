@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Jupyter Notebook Menu Entries,"{'main': [{'id': 'jp-mainmenu-file', 'items': [{'command': 'notebook:open-tree-tab', 'rank': 1}]}, {'id': 'jp-mainmenu-edit', 'items': [{'type': 'separator', 'rank': 8.5}, {'command': 'notebook:edit-metadata', 'rank': 8.5}, {'type': 'separator', 'rank': 8.5}]}]}",{},Jupyter Notebook Menu Entries,object

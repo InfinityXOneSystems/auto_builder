@@ -1,0 +1,16 @@
+id: mirror_business_v1
+objective: "Given a company URL or name, produce a one-line business model, one-line hidden bottleneck, one KPI to track, and an estimate of monthly cost of inaction"
+constraints:
+  - "Return fields exactly as specified; do not include extra bullets"
+  - "Tone: executive, concise"
+  - "No hedge phrases; be direct about bottleneck"
+output_shape:
+  model: string
+  bottleneck: string
+  kpi: string
+  cost_of_inaction: integer
+  spoken: string
+memory_write:
+  type: mirror_business
+  fields: [model, bottleneck, kpi, cost_of_inaction]
+  keep_provenance: true

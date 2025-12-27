@@ -1,0 +1,2 @@
+checks,name,status
+"[{'check': 'fetch_sources', 'result': 'pending'}]",intelligence,success

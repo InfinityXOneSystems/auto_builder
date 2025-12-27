@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.shortcuts,properties,title,type
+False,Property Inspector Settings.,"{'main': [{'id': 'jp-mainmenu-view', 'items': [{'command': 'property-inspector:show-panel', 'rank': 2}]}]}","[{'command': 'property-inspector:show-panel', 'keys': ['Accel Shift U'], 'selector': 'body'}]",{},Property Inspector,object

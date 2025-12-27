@@ -1,0 +1,2 @@
+checks,name,note,status
+"[{'check': 'credentials_present', 'result': True}, {'check': 'list_projects', 'result': 'pending'}]",google,,success

@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.toolbars,properties,title,type
+False,Workspace Indicator Settings,"{'main': [{'id': 'jp-mainmenu-view', 'items': [{'type': 'submenu', 'submenu': {'id': 'jp-mainmenu-view-appearance', 'items': [{'command': 'workspace-indicator:toggle', 'rank': 16}]}}]}]}","{'TopBar': [{'name': 'workspaceIndicator', 'rank': 1000, 'disabled': True}]}",{},Workspace Indicator,object

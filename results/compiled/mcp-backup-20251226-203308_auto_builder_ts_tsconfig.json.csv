@@ -1,0 +1,2 @@
+compilerOptions,exclude,include
+"{'target': 'ES2020', 'module': 'ESNext', 'moduleResolution': 'Node', 'outDir': 'dist', 'rootDir': '.', 'esModuleInterop': True, 'strict': True, 'skipLibCheck': True, 'declaration': True, 'declarationMap': True, 'sourceMap': True}","['node_modules', 'dist']",['./**/*.ts']

@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.metadataforms,title,type
+False,Setting for the common tools,"[{'id': 'commonToolsSection', 'label': 'Common tools', 'metadataSchema': {'type': 'object', 'properties': {'/tags': {'title': 'Cell tag', 'type': 'array', 'default': [], 'items': {'type': 'string'}}}}, 'uiSchema': {'ui:order': ['_CELL-TOOL', '/tags', '*']}, 'metadataOptions': {'/tags': {'customRenderer': '@jupyterlab/celltags-extension:plugin.renderer'}}}]",Common tools,object

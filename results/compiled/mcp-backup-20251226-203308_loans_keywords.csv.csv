@@ -1,0 +1,27 @@
+category,keyword,intent_weight
+Capital need,working capital,high
+Capital need,equipment financing,high
+Capital need,line of credit,high
+Capital need,bridge financing,medium
+Growth,opening a new location,high
+Growth,hiring,medium
+Growth,expanding operations,high
+Stress,cash flow gap,high
+Stress,payroll shortfall,high
+Stress,debt consolidation,medium
+Contracts,awarded contract,high
+Contracts,net 60 payment terms,medium
+Real estate,tenant improvement,medium
+Real estate,buildout,medium
+Ownership,business for sale,high
+Ownership,franchise opportunity,medium
+Capital need,SBA 7(a),medium
+Capital need,invoice factoring,medium
+Stress,late payments,high
+Stress,temporary closure,medium
+Growth,grand opening,high
+Growth,renovation,medium
+Procurement,RFP,medium
+Procurement,SAM.gov,low
+Operations,inventory purchase,medium
+Operations,fleet financing,medium

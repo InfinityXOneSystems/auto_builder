@@ -1,0 +1,2 @@
+checks,name,status
+"[{'check': 'workspace_search', 'result': 'ok'}, {'check': 'terminal_execute', 'result': 'ok'}]",vscode,success

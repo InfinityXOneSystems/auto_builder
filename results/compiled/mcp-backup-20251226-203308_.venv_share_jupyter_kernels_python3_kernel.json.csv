@@ -1,0 +1,2 @@
+argv,display_name,language,metadata
+"['python', '-m', 'ipykernel_launcher', '-f', '{connection_file}']",Python 3 (ipykernel),python,{'debugger': True}

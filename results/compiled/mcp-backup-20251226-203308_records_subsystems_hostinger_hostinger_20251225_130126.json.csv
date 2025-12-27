@@ -1,0 +1,2 @@
+checks,name,status
+"[{'check': 'api_key_present', 'result': True}, {'check': 'list_domains_helper', 'result': ""fallback: cannot import name 'hostinger_api' from 'hostinger_helper' (C:\\AI\\repos\\mcp\\hostinger_helper.py)""}]",hostinger,success

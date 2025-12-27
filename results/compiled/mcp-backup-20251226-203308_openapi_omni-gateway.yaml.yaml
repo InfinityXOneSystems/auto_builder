@@ -1,0 +1,86 @@
+openapi: 3.1.0
+info:
+  title: Omni Gateway API
+  version: '1.0'
+  description: API surface for the mcp Omni Gateway (predictions, crawl, admin)
+servers:
+  - url: http://localhost:8000
+paths:
+  /predict:
+    post:
+      summary: Run a prediction
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model:
+                  type: string
+                input:
+                  type: object
+      responses:
+        '200':
+          description: Prediction result
+  /crawl:
+    post:
+      summary: Start a crawl job
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                url:
+                  type: string
+                depth:
+                  type: integer
+      responses:
+        '202':
+          description: Crawl started
+  /admin/doc/mode:
+    get:
+      summary: Get doc-evolution mode
+      responses:
+        '200':
+          description: Current mode
+    post:
+      summary: Set doc-evolution mode
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mode:
+                  type: string
+                path_override:
+                  type: string
+      responses:
+        '200':
+          description: Mode set
+  /health:
+    get:
+      summary: Gateway health
+      responses:
+        '200':
+          description: OK
+  /ingest:
+    post:
+      summary: Ingest a document (placeholder)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                doc_id: {type: string}
+                content: {type: string}
+              required: [doc_id, content]
+      responses:
+        '200':
+          description: Ingested

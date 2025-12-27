@@ -1,0 +1,14 @@
+id: conviction_v1
+objective: "Return one clear decision, justification, risk, and fallback. No alternatives."
+constraints:
+  - "Exactly one decision, one justification (brief), one risk, one fallback"
+  - "Tone: decisive, authoritative"
+output_shape:
+  decision: string
+  justification: string
+  risk: string
+  fallback: string
+memory_write:
+  type: conviction
+  fields: [decision, justification, risk, fallback]
+approval_required: true

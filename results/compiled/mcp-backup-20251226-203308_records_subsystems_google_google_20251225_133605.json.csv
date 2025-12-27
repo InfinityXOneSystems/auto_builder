@@ -1,0 +1,2 @@
+checks,name,status
+"[{'check': 'exception', 'result': 'Service account info was not in the expected format, missing fields client_email, token_uri.'}]",google,fail

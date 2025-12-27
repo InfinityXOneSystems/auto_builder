@@ -1,0 +1,29 @@
+keywords:
+  - "need funding fast"
+  - "cash flow problem"
+  - "waiting on net 60"
+  - "behind on payroll"
+  - "bridge loan"
+  - "business loan options"
+sources:
+  - url: "https://www.reddit.com/r/smallbusiness"
+    type: "reddit"
+    frequency: "*/15 * * * *"  # every 15 minutes
+    weight: 0.9
+    geo_hint: null
+  - url: "https://search.twitter.com"
+    type: "twitter_search"
+    frequency: "*/5 * * * *"
+    weight: 0.8
+    geo_hint: "US"
+  - url: "https://www.bbb.org"
+    type: "review_site"
+    frequency: "0 */6 * * *"
+    weight: 0.6
+  - url: "https://www.yelp.com"
+    type: "review_site"
+    frequency: "0 */6 * * *"
+    weight: 0.5
+crawl_defaults:
+  timeout_seconds: 60
+  retries: 3

@@ -1,0 +1,2 @@
+checks,name,note,status
+"[{'check': 'token_present', 'result': False}, {'check': 'pages_status', 'result': 'pending'}]",github,Set GITHUB_TOKEN to fully enable GitHub tests,skipped

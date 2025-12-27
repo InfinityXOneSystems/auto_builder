@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,jupyter.lab.shortcuts,properties,title,type
+False,Inspector settings.,"{'main': [{'id': 'jp-mainmenu-help', 'items': [{'type': 'separator', 'rank': 0.1}, {'command': 'inspector:open', 'rank': 0.1}, {'type': 'separator', 'rank': 0.1}]}]}","[{'command': 'inspector:open', 'keys': ['Accel I'], 'selector': 'body'}, {'command': 'inspector:close', 'keys': ['Accel I'], 'selector': ""body[data-jp-inspector='open']""}]",{},Inspector,object

@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,Jupyter Notebook Help Menu Entries,"{'main': [{'id': 'jp-mainmenu-help', 'items': [{'command': 'help:about', 'rank': 0}, {'type': 'separator', 'rank': 1}]}]}",{},Jupyter Notebook Help Menu Entries,object

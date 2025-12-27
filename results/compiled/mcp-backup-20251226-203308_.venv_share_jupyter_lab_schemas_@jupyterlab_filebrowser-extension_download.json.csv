@@ -1,0 +1,2 @@
+additionalProperties,description,jupyter.lab.menus,properties,title,type
+False,File Browser Download settings.,"{'context': [{'command': 'filebrowser:download', 'selector': '.jp-DirListing-item[data-isdir=""false""]', 'rank': 9}, {'command': 'filebrowser:copy-download-link', 'selector': '.jp-DirListing-item[data-isdir=""false""]', 'rank': 13}]}",{},File Browser Download,object

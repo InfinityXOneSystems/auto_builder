@@ -1,0 +1,10 @@
+{
+  "gateway": "http://127.0.0.1:8000",
+  "results": [
+    {
+      "agent": "headless-crawler",
+      "status": 500,
+      "error": "<Response [500]>"
+    }
+  ]
+}
