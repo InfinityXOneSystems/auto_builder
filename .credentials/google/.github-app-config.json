@@ -1,0 +1,28 @@
+{
+    "app_id": "2494652",
+    "client_id": "Iv23liWSRKS3dsHX0oYV",
+    "app_name": "Infinity XOS Orchestrator",
+    "organization": "InfinityXOneSystems",
+    "homepage": "https://infinityxai.com",
+    "callback_url": "https://admin.infinityxai.com/auth/github/callback",
+    "webhook_url": "https://admin.infinityxai.com/webhooks/github",
+    "setup_url": "https://infinityxai.com/admin",
+    "public_link": "https://github.com/apps/infinity-xos-orchestrator",
+    "installation_id_personal": "100155432",
+    "installation_id_infinityxone": "100945151",
+    "webhook_secret": "123456789123456789",
+    "permissions": {
+        "contents": "write",
+        "issues": "write",
+        "pull_requests": "write",
+        "metadata": "read",
+        "workflows": "write"
+    },
+    "events": [
+        "push",
+        "pull_request",
+        "issues",
+        "issue_comment",
+        "workflow_run"
+    ]
+}
