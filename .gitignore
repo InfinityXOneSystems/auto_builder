@@ -186,3 +186,23 @@ cython_debug/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+
+# --- INFINITY XOS SECRET LOCK ---
+*.json
+.env
+.env.*
+credentials.json
+workspace-sa.json
+CredentialManager/
+
+# --- INFINITY-XOS SECRET LOCK ---
+*.json
+.env
+.env.*
+credentials.json
+workspace-sa.json
+CredentialManager/
+.secrets/
+
+# ignore local credentials
+.credentials/

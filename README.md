@@ -37,3 +37,9 @@ export CLOUD_RUN_REGION=us-central1
 export IMAGE_NAME=gcr.io/$GCP_PROJECT/omni-gateway:latest
 ./scripts/deploy_cloudrun.sh
 ```
+
+---
+
+# auto_builder
+
+This section is reserved for auto_builder documentation.
