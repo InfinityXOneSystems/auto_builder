@@ -1,4 +1,5 @@
 import sys
+
 import pytest
 
-sys.exit(pytest.main(['-q', 'tests']))
+sys.exit(pytest.main(["-q", "tests"]))

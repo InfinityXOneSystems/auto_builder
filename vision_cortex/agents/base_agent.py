@@ -23,5 +23,7 @@ class BaseAgent:
     def __init__(self, name: str = "base"):
         self.name = name
 
-    def run_task(self, context: AgentContext, payload: Dict[str, Any]) -> Dict[str, Any]:
+    def run_task(
+        self, context: AgentContext, payload: Dict[str, Any]
+    ) -> Dict[str, Any]:
         raise NotImplementedError("run_task must be implemented by agents")

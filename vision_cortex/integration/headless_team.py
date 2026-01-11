@@ -1,5 +1,5 @@
-from typing import List
 from dataclasses import dataclass
+from typing import List
 
 
 @dataclass
@@ -16,5 +16,9 @@ def init_headless_team() -> List[HeadlessAgentDesc]:
     `.name` and a `__dict__` representation).
     """
     return [
-        HeadlessAgentDesc(id="headless-crawler", name="headless-crawler", description="Fetch pages via HTTP"),
+        HeadlessAgentDesc(
+            id="headless-crawler",
+            name="headless-crawler",
+            description="Fetch pages via HTTP",
+        ),
     ]

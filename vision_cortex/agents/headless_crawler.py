@@ -1,6 +1,8 @@
-from .base_agent import BaseAgent, AgentContext
-from typing import Dict, Any
+from typing import Any, Dict
+
 import httpx
+
+from .base_agent import AgentContext, BaseAgent
 
 
 class HeadlessCrawlerAgent(BaseAgent):
@@ -9,7 +11,9 @@ class HeadlessCrawlerAgent(BaseAgent):
         self.role = role
         self.bus = bus
 
-    def run_task(self, context: AgentContext, payload: Dict[str, Any]) -> Dict[str, Any]:
+    def run_task(
+        self, context: AgentContext, payload: Dict[str, Any]
+    ) -> Dict[str, Any]:
         url = payload.get("url")
         if not url:
             return {"error": "missing url in payload"}
